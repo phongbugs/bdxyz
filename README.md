@@ -1,6 +1,12 @@
-# Bieudo
+# bdxyz
 
 ## CMD Sequelize
+
+- Init sequelize
+
+  ```js
+    sequelize-cli init
+  ```
 
 - Create model student
 
