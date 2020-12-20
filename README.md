@@ -44,3 +44,27 @@ mongoexport --db mark --collection students --out students.json
   ```Showing rows 74000 - 74347 (74348 total, Query took 0.0550 seconds.) [_id: 74001... - 74500...]```
 
 - recursive
+
+## Knowledge
+
+- Remove a element by condition with array object
+  - Filter then map
+
+  ```js
+
+  let students = require('./' + srcFile)
+      .filter((student) => student.name)
+      .map((student) => {
+        delete student._id;
+        return student;
+      });
+  ```
+
+- Convert ```json``` to ```csv```
+
+  ```js
+  id,name,date,gdcd,nguvan,lichsu,diali,toan,vatli,hoahoc,sinhhoc,tienganh,tiengnga,tiengduc,tiengphap,tiengtrung,tiengnhat,khxh,khtn
+  02000001,PHẠM HOÀNG HƯƠNG ÁI,04/11/2002,7.25,6.25,5.75,7,6.6,-1,-1,-1,5.2,-1,-1,-1,-1,-1,6.67,-1,
+  02000002,ĐẶNG HUỲNH VĨNH AN,13/12/2002,8.5,7.75,7,7.25,8.2,-1,-1,-1,7,-1,-1,-1,-1,-1,7.58,-1,
+  ```
+  
