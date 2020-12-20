@@ -33,6 +33,7 @@ sequelize-cli seed:generate --name seed-student
 - Export student from mongodb
 
 ```js
+cd "C:\Program Files\MongoDB\Server\3.4\bin"
 mongoexport --db mark --collection students --out students.json
 ```
 

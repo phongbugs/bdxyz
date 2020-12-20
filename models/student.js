@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     tienganh: DataTypes.FLOAT,
     tiengnga: DataTypes.FLOAT,
     lichsu: DataTypes.FLOAT,
-    nguvan: DataTypes.FLOAT,
+    //nguvan: DataTypes.FLOAT,
     tiengduc: DataTypes.FLOAT,
     tiengphap: DataTypes.FLOAT,
     tiengtrung: DataTypes.FLOAT,
