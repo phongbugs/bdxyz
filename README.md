@@ -35,3 +35,11 @@ sequelize-cli seed:generate --name seed-student
 ```js
 mongoexport --db mark --collection students --out students.json
 ```
+
+- for loop
+
+  ```Showing rows 0 - 24 (74348 total, Query took 0.0420 seconds.) [nguvan: ... - ...]```
+
+  ```Showing rows 74000 - 74347 (74348 total, Query took 0.0550 seconds.) [_id: 74001... - 74500...]```
+
+- recursive

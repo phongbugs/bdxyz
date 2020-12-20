@@ -39,7 +39,6 @@ function sleep(second) {
 //   });
 // }
 async function insertOneRange(queryInterface, students, range) {
-  
   return await queryInterface.bulkInsert(
     'students',
     students.slice(range.startId, range.endId),
@@ -53,7 +52,7 @@ async function insertRecursive(
   students
 ) {
   let range = ranges[startIndexRange];
-  console.log(range)
+  console.log(range);
   await sleep(range.timeOutEachId);
   await insertOneRange(queryInterface, students, range).then(async () => {
     if (++startIndexRange < ranges.length)
@@ -76,21 +75,19 @@ module.exports = {
       delete student._id;
       return student;
     });
-    let ranges = genRangeId(students.length, 1000, 1000);
-    //console.log(ranges);
-    //console.log(students.slice(0, 10))
-    // for (let i = 0; i < ranges.length; i++) {
-    //   let range = ranges[i];
-    //   // await queryInterface.bulkInsert(
-    //   //   'students',
-    //   //   students.slice(range.startId, range.endId),
-    //   //   {}
-    //   // );
-    //   // await delay(range.timeOutEachId)
-    //   // console.log(range)
-
-    // }
-    await insertRecursive(0, ranges, queryInterface, students);
+    let ranges = genRangeId(students.length, 500, 1500);
+    for (let i = 0; i < ranges.length; i++) {
+      let range = ranges[i];
+      console.log(range);
+      await queryInterface.bulkInsert(
+        'students',
+        students.slice(range.startId, range.endId),
+        {}
+      );
+      await sleep(range.timeOutEachId);
+    }
+    // Tested - successfully
+    //await insertRecursive(0, ranges, queryInterface, students);
   },
 
   down: async (queryInterface, Sequelize) => {
