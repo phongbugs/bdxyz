@@ -6,7 +6,7 @@
  */
 const log = console.log,
   fs = require('fs'),
-  toJson = ({ srcFile, destFile }) => {
+  toJson = ({ srcFile, destFile }, callback) => {
     let students = require('./' + srcFile)
       .filter((student) => student.name)
       .map((student) => {
@@ -15,9 +15,14 @@ const log = console.log,
       });
     fs.writeFile(
       './' + destFile,
-      JSON.stringify(students, null, 1),
+      'module.exports =' + JSON.stringify(students, null, 1),
       'utf8',
-      (err) => (err ? log(err) : log('saved ' + destFile))
+      (err) =>
+        err
+          ? log(err)
+          : callback
+          ? callback(destFile)
+          : log('saved ' + destFile)
     );
   },
   toCsv = ({ srcFile, destFile }) => {
@@ -57,6 +62,19 @@ const log = console.log,
     fs.writeFile('./' + destFile, csv.join('\r\n'), 'utf8', (err) =>
       err ? log(err) : log(destFile)
     );
+  },
+  convertJsonToCsv = () => {
+    toJson(
+      { srcFile: 'seeders/students.js', destFile: 'students.map.js' },
+      (destFile) => {
+        log('saved ' + destFile);
+        toCsv({ srcFile: 'students.map.js', destFile: 'students.map.csv' });
+      }
+    );
   };
-toJson({ srcFile: './seeders/students.js', destFile: 'students.map.js' });
-//toCsv({ srcFile: 'students.map.js', destFile: 'students.map.csv' });
+
+(()=>{
+  //toJson({ srcFile: 'seeders/students.js', destFile: 'students.map.js' });
+  //toCsv({ srcFile: 'students.map.js', destFile: 'students.map.csv' });
+  convertJsonToCsv();
+})()
